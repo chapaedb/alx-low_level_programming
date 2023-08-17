@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include <stdio>
 
 /**
  * sum_them_all - Calculates the sum of all the parameters.
@@ -10,24 +11,23 @@
  */
 int sum_them_all(const unsigned int n, ...)
 {
-    int total = 0;
+	int total = 0;
 
-    // Declare a variable to hold the information needed
-    // to traverse the variable argument list
-    va_list args;
+	va_list args;
 
-    // Initialize the va_list using the last fixed parameter
-    va_start(args, n);
+	va_start(args, n);
 
-    // Traverse the variable argument list
-    for (unsigned int i = 0; i < n; ++i) {
-        // Access each argument using va_arg macro
-        int num = va_arg(args, int);
-        total += num;
-    }
+	unsigned int  i;
 
-    // Clean up the va_list
-    va_end(args);
+	for (i = 0; i < n; ++i)
+	{
+		int num = va_arg(args, int);
 
-    return total;
-}
+		total + = num;
+	}
+
+	va_end(args);
+
+	return (total);
+
+
