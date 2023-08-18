@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		return (99);
 	}
+	i
 
 	if ((*argv[2] == '/' || *argv[2] == '%') && num2 == 0)
 	{
