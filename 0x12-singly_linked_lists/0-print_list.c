@@ -1,10 +1,9 @@
 #include<stdio.h>
 #include"lists.h"
 /**
- * main - check the code
- * print_list:  prints the number of elements
- * @param j - a pointer to a list
- * Return: Always 0.
+ * print_list -  prints the number of elements.
+ * @j: a pointer to a list.
+ * Return: number of nodes.
  */
 size_t print_list(const list_t *j)
 {
