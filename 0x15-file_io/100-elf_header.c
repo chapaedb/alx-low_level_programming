@@ -8,7 +8,8 @@
 
 #define BUF_SIZE 64
 
-typedef struct {
+typedef struct
+{
     unsigned char e_ident[16];
     uint16_t e_type;
     uint16_t e_machine;
@@ -45,14 +46,12 @@ void print_error(const char *message)
  */
 void print_elf_header(const Elf64_Ehdr *header)
 {
-    printf("ELF Header:\n");
-    printf("  Magic:   ");
-    
     int i;
 
+    printf("ELF Header:\n");
+    printf("  Magic:   ");
     for (i = 0; i < 16; i++)
-    {
-        printf("%02x ", header->e_ident[i]);
+    {	    printf("%02x ", header->e_ident[i]);
     }
     printf("\n");
     printf("  Class:                             %d-bit\n", (header->e_ident[4] == 1) ? 32 : 64);
@@ -69,22 +68,22 @@ void print_elf_header(const Elf64_Ehdr *header)
  * @argc: Number of command-line arguments
  * @argv: Array of command-line arguments
  *
- * Return: 0 on success, 1 on incorrect usage, 98 on error
+ * Return: (0) on success, (1) on incorrect usage, (98) on error
  */
 int main(int argc, char *argv[])
 {
-	const char *filename;
-       	if (argc != 2)
+    const char *filename;
+    int fd;
+    Elf64_Ehdr header;
+    ssize_t bytes_read;
+
+    if (argc != 2)
     {
         fprintf(stderr, "Usage: elf_header elf_filename\n");
         return (1);
     }
 
     filename = argv[1];
-    int fd;
-
-    Elf64_Ehdr header;
-    ssize_t bytes_read;
 
     fd = open(filename, O_RDONLY);
     if (fd == -1)
@@ -101,7 +100,7 @@ int main(int argc, char *argv[])
     if (bytes_read != sizeof(header))
     {
         fprintf(stderr, "Error: Incomplete read of ELF header\n");
-        return (98);
+	return (98);
     }
 
     if (header.e_ident[0] != 0x7f || strncmp((char *)&header.e_ident[1], "ELF", 3) != 0)
